@@ -3,15 +3,42 @@
   "width": 800,
   "height": 500,
   "title": "Homework 9",
-  "projection": {"type": "equirectangular"},
-  "layer": [
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/YichengPeng2209/homework9/main/js/world_geo.topojson",
-        "format": {"type": "topojson", "feature": "custom.geo"}
-      },
-      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+  
+
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/YichengPeng2209/homework9/main/js/world_geo.topojson",
+    "format": {
+          "type": "topojson",
+          "feature": "custom.geo"
+        }
+  },
+  "transform": [{
+      "lookup": "properties.name",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/YichengPeng2209/homework9/main/data/2020.csv"
+        },
+        "key": "Country",
+        "fields": ["Ladderscore"]
+      }
     }
-    
-  ]
+  ],
+  "projection": {
+    "type": "equirectangular"
+  },
+  "mark": {
+    "type": "geoshape"
+    },
+  "encoding": {
+    "color": {
+      "field": "Ladderscore",
+      "type": "quantitative",
+      "scale": {"type": "log"}
+    },
+    "tooltip": [
+      {"field": "properties.name", "type": "nominal", "title": "Country"},
+      {"field": "Ladderscore", "type": "quantitative"}
+    ]
+  }
 }
