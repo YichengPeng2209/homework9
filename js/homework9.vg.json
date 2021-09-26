@@ -34,7 +34,7 @@
     "color": {
       "field": "Ladderscore",
       "type": "quantitative",
-      "scale": {"type": "log"}
+      "scale": {"type": "threshold","domain":[2,4,6,8],"range":["#fcf0ec","#ffd4c1","#ff9261","#fc8149"]}
     },
     "tooltip": [
       {"field": "properties.name", "type": "nominal", "title": "Country"},
