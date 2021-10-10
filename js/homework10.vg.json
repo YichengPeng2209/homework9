@@ -1,0 +1,79 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "height": 400,
+  "width": 400,
+  "title": "World Happiness Overall",
+  "data": {
+    "url": "https://raw.githubusercontent.com/YichengPeng2209/homework9/main/data/2020.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "Ladderscore",
+      "type": "quantitative",
+      "title":"Ladder score",
+      "scale": {"type": "log",  "domain":[2, 10]}
+    },
+    "y": {
+      "field": "Logged GDP per capita",
+      "type": "quantitative",
+      "axis": { "tickCount": 6},
+      "scale": {"type": "log", "domain":[5,15]}
+    }
+  },
+
+  "layer":[{
+      "selection": {
+    "region_highlight": {
+      "type": "multi",
+      "fields": ["Regional indicator"],
+      "bind": "legend"}
+    },
+      "mark": "circle",
+  "encoding": {
+    
+    "opacity":{
+      "condition":{"selection":"region_highlight","value":0.8},
+      "value":0.1
+    },
+    "size": {"field": "corruptionindex_10", "title":"Corruption (1-100)","type": "quantitative",  "scale": {"range": [30, 500]}
+},
+    "fill": {"field": "Regional indicator",  "type": "nominal"},
+    "color": {"field": "Regional indicator", "type": "nominal"},
+   
+    "tooltip": [
+      {"field": "Country", "type": "nominal"},
+      {"field": "Logged GDP per capita", "type": "quantitative", "format": ","},
+      {"field": "Ladderscore","title":"Ladder score", "type": "quantitative", "format": ","},
+      {"field": "Social support", "type": "quantitative", "format": ","},
+      {"field": "Healthy life expectancy", "type": "quantitative", "format": ","},
+      {"field": "corruptionindex_10","title":"Corruption", "type": "quantitative", "format": ","}
+    ]
+
+  }
+
+  },
+  {
+      "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": -12,
+          "fontSize": 10.5
+        },
+        "encoding": {
+            "text":{"field": "Country",  "type": "nominal"},
+            "color":{"value":"black"},
+            "opacity": {
+            "condition": {
+                "test": "datum['Country'] == 'Singapore'||datum['Country'] =='Afghanistan'",
+                "value": 1
+            },
+            "value": 0
+        }
+        }
+
+  }
+
+]
+  
+}
